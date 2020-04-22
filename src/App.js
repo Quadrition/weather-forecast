@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import NavBar from "./components/NavBar";
+import OverView from "./components/Overview";
+import "./App.css";
 
 function App() {
+  const [overviewState, setOverViewState] = React.useState(false);
+
+  const handleDrawerToggle = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setOverViewState(open);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <NavBar onOverviewOpen={handleDrawerToggle(true)} />
+      <OverView
+        onOverviewClose={handleDrawerToggle(false)}
+        open={overviewState}
+      />
+    </React.Fragment>
   );
 }
 
