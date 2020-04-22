@@ -78,7 +78,12 @@ export default function CurrentWeatherOverview(props) {
         <Typography variant="subtitle2">tiny rain</Typography>
       </Box>
       <Box className={classes.infoBox}>
-        <Icon path={mdiCoolantTemperature} title="Location" size={0.7} />
+        <Icon
+          path={mdiCoolantTemperature}
+          title="Location"
+          size={0.7}
+          className={classes.locationIcon}
+        />
         <Typography variant="subtitle1" className={classes.infoBoxText}>
           temperature:
         </Typography>
@@ -89,7 +94,12 @@ export default function CurrentWeatherOverview(props) {
         </Box>
       </Box>
       <Box className={classes.infoBox}>
-        <Icon path={mdiWaterPercent} title="Location" size={0.7} />
+        <Icon
+          path={mdiWaterPercent}
+          title="Location"
+          size={0.7}
+          className={classes.locationIcon}
+        />
         <Typography variant="subtitle1" className={classes.infoBoxText}>
           vlaznost:
         </Typography>
@@ -100,7 +110,12 @@ export default function CurrentWeatherOverview(props) {
         </Box>
       </Box>
       <Box className={classes.lastInfoBox}>
-        <Icon path={mdiWeatherWindy} title="Location" size={0.7} />
+        <Icon
+          path={mdiWeatherWindy}
+          title="Location"
+          size={0.7}
+          className={classes.locationIcon}
+        />
         <Typography variant="subtitle1" className={classes.infoBoxText}>
           wind speed:
         </Typography>
