@@ -4,8 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Box from "@material-ui/core/Box";
+import { mdiArrowLeft } from "@mdi/js";
+import Icon from "@mdi/react";
 import CurrentWeatherOverview from "./CurrentWeatherOverview";
 
 const drawerWidth = 240;
@@ -43,7 +44,7 @@ export default function Overview(props) {
           <Typography variant="h6">Overview</Typography>
         </Box>
         <IconButton onClick={props.onOverviewClose}>
-          <ChevronLeftIcon />
+          <Icon path={mdiArrowLeft} title="Arrow left" size={1} />
         </IconButton>
       </div>
       <Divider />

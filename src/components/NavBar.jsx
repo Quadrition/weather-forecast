@@ -4,7 +4,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import { mdiMenu } from "@mdi/js";
+import Icon from "@mdi/react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,7 @@ export default function NavBar(props) {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon />
+            <Icon path={mdiMenu} title="Menu" size={1} />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Weather Forecast
