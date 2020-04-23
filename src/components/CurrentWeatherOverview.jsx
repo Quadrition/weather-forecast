@@ -62,20 +62,20 @@ export default function CurrentWeatherOverview(props) {
         <Avatar
           alt="Current Weather"
           className={classes.weatherImage}
-          src="http://openweathermap.org/img/wn/10d@2x.png"
+          src={`http://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
         />
       </Box>
       <Box
         className={classes.headerBox}
         style={{ margin: theme.spacing(0, 0, 1, 0) }}
       >
-        <Typography variant="h6">Rain</Typography>
+        <Typography variant="h6">{props.weatherMain}</Typography>
       </Box>
       <Box
         className={classes.headerBox}
         style={{ margin: theme.spacing(0, 0, 2, 0) }}
       >
-        <Typography variant="subtitle2">tiny rain</Typography>
+        <Typography variant="subtitle2">{props.weatherDescription}</Typography>
       </Box>
       <Box className={classes.infoBox}>
         <Icon
@@ -89,7 +89,7 @@ export default function CurrentWeatherOverview(props) {
         </Typography>
         <Box flexGrow={1}>
           <Typography variant="subtitle1" className={classes.infoBoxValue}>
-            23
+            {props.weatherTemp}
           </Typography>
         </Box>
       </Box>
@@ -101,11 +101,11 @@ export default function CurrentWeatherOverview(props) {
           className={classes.locationIcon}
         />
         <Typography variant="subtitle1" className={classes.infoBoxText}>
-          vlaznost:
+          humidity:
         </Typography>
         <Box flexGrow={1}>
           <Typography variant="subtitle1" className={classes.infoBoxValue}>
-            1016
+            {props.weatherHumidity}
           </Typography>
         </Box>
       </Box>
@@ -121,7 +121,7 @@ export default function CurrentWeatherOverview(props) {
         </Typography>
         <Box flexGrow={1}>
           <Typography variant="subtitle1" className={classes.infoBoxValue}>
-            0.47
+            {props.weatherWind}
           </Typography>
         </Box>
       </Box>

@@ -35,6 +35,7 @@ export default function Overview(props) {
       anchor="left"
       open={props.open}
       onClose={props.onOverviewClose}
+      onOpen={props.onOverviewOpen}
       classes={{
         paper: classes.drawerPaper,
       }}
@@ -48,7 +49,14 @@ export default function Overview(props) {
         </IconButton>
       </div>
       <Divider />
-      <CurrentWeatherOverview />
+      <CurrentWeatherOverview
+        weatherMain={props.weatherMain}
+        weatherDescription={props.weatherDescription}
+        weatherIcon={props.weatherIcon}
+        weatherTemp={props.weatherTemp}
+        weatherHumidity={props.weatherHumidity}
+        weatherWind={props.weatherWind}
+      />
       <Divider />
     </SwipeableDrawer>
   );
