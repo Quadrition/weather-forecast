@@ -56,7 +56,7 @@ export default function CurrentWeatherOverview(props) {
           size={1}
           className={classes.locationIcon}
         />
-        <Typography variant="h5">Novi Sad</Typography>
+        <Typography variant="h5">Novi Sad, RS</Typography>
       </Box>
       <Box className={classes.headerBox}>
         <Avatar

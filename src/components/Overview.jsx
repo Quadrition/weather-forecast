@@ -1,7 +1,8 @@
 import React from "react";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
@@ -24,10 +25,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: theme.spacing(1, 1),
   },
+  searchTextField: {
+    margin: theme.spacing(0, 2),
+  },
+  citiesSubText: {
+    margin: theme.spacing(1, 2),
+  },
 }));
 
 export default function Overview(props) {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <SwipeableDrawer
@@ -57,7 +65,29 @@ export default function Overview(props) {
         weatherHumidity={props.weatherHumidity}
         weatherWind={props.weatherWind}
       />
-      <Divider />
+      <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
+      <Typography
+        className={classes.citiesSubText}
+        color="textSecondary"
+        display="block"
+        variant="caption"
+      >
+        Selected cities
+      </Typography>
+      <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
+      <Typography
+        className={classes.citiesSubText}
+        color="textSecondary"
+        display="block"
+        variant="caption"
+      >
+        All cities
+      </Typography>
+      <TextField
+        id="standard-basic"
+        label="Search"
+        className={classes.searchTextField}
+      />
     </SwipeableDrawer>
   );
 }
