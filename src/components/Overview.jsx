@@ -75,14 +75,7 @@ export default function Overview(props) {
         </IconButton>
       </div>
       <Divider />
-      <CurrentWeatherOverview
-        weatherMain={props.weatherMain}
-        weatherDescription={props.weatherDescription}
-        weatherIcon={props.weatherIcon}
-        weatherTemp={props.weatherTemp}
-        weatherHumidity={props.weatherHumidity}
-        weatherWind={props.weatherWind}
-      />
+      <CurrentWeatherOverview />
       <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
       <Typography
         className={classes.citiesSubText}
@@ -106,17 +99,16 @@ export default function Overview(props) {
       </Typography>
       <TextField
         id="standard-basic"
-        label="Search by city name"
+        label="Search by name"
         className={classes.searchTextField}
         onChange={handleChangeSearch}
       />
       <Scrollbars>
-        {searchCities.map((city) => {
-          if (!city.selected)
-            return (
-              <LocationCard city={city} onCityAdd={props.onSelectedCityAdd} />
-            );
-        })}
+        {searchCities
+          .filter((city) => !city.selected)
+          .map((city) => (
+            <LocationCard city={city} onCityAdd={props.onSelectedCityAdd} />
+          ))}
       </Scrollbars>
     </SwipeableDrawer>
   );
