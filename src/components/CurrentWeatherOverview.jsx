@@ -49,7 +49,7 @@ export default function CurrentWeatherOverview() {
 
   React.useEffect(() => {
     fetch(
-      "http://api.openweathermap.org/data/2.5/weather?q=Novi%20Sad&appid=78e1adc1e41d5f49a06956e69d4225ce"
+      "http://api.openweathermap.org/data/2.5/weather?q=Novi%20Sad&units=metric&appid=78e1adc1e41d5f49a06956e69d4225ce"
     )
       .then((res) => res.json())
       .then((json) => {
@@ -89,7 +89,7 @@ export default function CurrentWeatherOverview() {
 
   const WeatherTemp = () => {
     if (weather !== undefined) {
-      return weather.main.temp;
+      return weather.main.temp + "\u00b0C";
     } else {
       return "";
     }
@@ -97,7 +97,7 @@ export default function CurrentWeatherOverview() {
 
   const WeatherHumidity = () => {
     if (weather !== undefined) {
-      return weather.main.humidity;
+      return weather.main.humidity + "%";
     } else {
       return "";
     }
@@ -105,7 +105,7 @@ export default function CurrentWeatherOverview() {
 
   const WeatherWind = () => {
     if (weather !== undefined) {
-      return weather.wind.speed;
+      return weather.wind.speed + "m/s";
     } else {
       return "";
     }

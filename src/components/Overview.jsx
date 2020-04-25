@@ -66,44 +66,44 @@ export default function Overview(props) {
         paper: classes.drawerPaper,
       }}
     >
-      <div className={classes.drawerHeader}>
-        <Box flexGrow={1}>
-          <Typography variant="h6">Overview</Typography>
-        </Box>
-        <IconButton onClick={props.onOverviewClose}>
-          <Icon path={mdiArrowLeft} title="Arrow left" size={1} />
-        </IconButton>
-      </div>
-      <Divider />
-      <CurrentWeatherOverview />
-      <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
-      <Typography
-        className={classes.citiesSubText}
-        color="textSecondary"
-        display="block"
-        variant="caption"
-      >
-        Selected cities
-      </Typography>
-      {props.selectedCities.map((city) => (
-        <LocationCard city={city} onCityRemove={props.onSelectedCityRemove} />
-      ))}
-      <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
-      <Typography
-        className={classes.citiesSubText}
-        color="textSecondary"
-        display="block"
-        variant="caption"
-      >
-        All cities
-      </Typography>
-      <TextField
-        id="standard-basic"
-        label="Search by name"
-        className={classes.searchTextField}
-        onChange={handleChangeSearch}
-      />
       <Scrollbars>
+        <div className={classes.drawerHeader}>
+          <Box flexGrow={1}>
+            <Typography variant="h6">Overview</Typography>
+          </Box>
+          <IconButton onClick={props.onOverviewClose}>
+            <Icon path={mdiArrowLeft} title="Arrow left" size={1} />
+          </IconButton>
+        </div>
+        <Divider />
+        <CurrentWeatherOverview />
+        <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
+        <Typography
+          className={classes.citiesSubText}
+          color="textSecondary"
+          display="block"
+          variant="caption"
+        >
+          Selected cities
+        </Typography>
+        {props.selectedCities.map((city) => (
+          <LocationCard city={city} onCityRemove={props.onSelectedCityRemove} />
+        ))}
+        <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
+        <Typography
+          className={classes.citiesSubText}
+          color="textSecondary"
+          display="block"
+          variant="caption"
+        >
+          All cities
+        </Typography>
+        <TextField
+          id="standard-basic"
+          label="Search by name"
+          className={classes.searchTextField}
+          onChange={handleChangeSearch}
+        />
         {searchCities
           .filter((city) => !city.selected)
           .map((city) => (

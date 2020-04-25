@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import OverView from "./components/Overview";
+import DailyForecast from "./pages/DailyForecast";
 import "./App.css";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         onSelectedCityRemove={handleRemoveSelectedCities}
         selectedCities={selectedCities}
       />
+      <DailyForecast />
     </React.Fragment>
   );
 }
