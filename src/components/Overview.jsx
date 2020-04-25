@@ -8,7 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Box from "@material-ui/core/Box";
 import { mdiArrowLeft } from "@mdi/js";
 import Icon from "@mdi/react";
+import Scrollbars from "react-custom-scrollbars";
 import CurrentWeatherOverview from "./CurrentWeatherOverview";
+import LocationCard from "./LocationCard";
+import allCities from "../city.list.json";
 
 const drawerWidth = 240;
 
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 1),
   },
   searchTextField: {
-    margin: theme.spacing(0, 2),
+    margin: theme.spacing(0, 2, 2, 2),
   },
   citiesSubText: {
     margin: theme.spacing(1, 2),
@@ -36,6 +39,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Overview(props) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const [searchCities, setSearchCities] = React.useState([]);
+
+  const handleChangeSearch = (e) => {
+    if (e.target.value.trim().length >= 4) {
+      const searched = allCities.filter((city) =>
+        city.name
+          .toLocaleLowerCase()
+          .includes(e.target.value.toLocaleLowerCase())
+      );
+      setSearchCities(searched);
+    } else {
+      setSearchCities([]);
+    }
+  };
 
   return (
     <SwipeableDrawer
@@ -74,6 +92,9 @@ export default function Overview(props) {
       >
         Selected cities
       </Typography>
+      {props.selectedCities.map((city) => (
+        <LocationCard city={city} onCityRemove={props.onSelectedCityRemove} />
+      ))}
       <Divider style={{ margin: theme.spacing(2, 0, 0, 0) }} />
       <Typography
         className={classes.citiesSubText}
@@ -85,9 +106,18 @@ export default function Overview(props) {
       </Typography>
       <TextField
         id="standard-basic"
-        label="Search"
+        label="Search by city name"
         className={classes.searchTextField}
+        onChange={handleChangeSearch}
       />
+      <Scrollbars>
+        {searchCities.map((city) => {
+          if (!city.selected)
+            return (
+              <LocationCard city={city} onCityAdd={props.onSelectedCityAdd} />
+            );
+        })}
+      </Scrollbars>
     </SwipeableDrawer>
   );
 }
