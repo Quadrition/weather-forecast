@@ -1,118 +1,81 @@
-import * as React from "react";
-import Paper from "@material-ui/core/Paper";
-import {
-  Chart,
-  ArgumentAxis,
-  ValueAxis,
-  LineSeries,
-  Title,
-  Legend,
-} from "@devexpress/dx-react-chart-material-ui";
-import { withStyles } from "@material-ui/core/styles";
-import { Animation } from "@devexpress/dx-react-chart";
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import Switch from "@material-ui/core/Switch";
+import DailyChart from "../components/DailyChart";
 
-import { confidence as data } from "../data-vizualization";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-const format = () => (tick) => tick;
-const legendStyles = () => ({
-  root: {
-    display: "flex",
-    margin: "auto",
-    flexDirection: "row",
-  },
-});
-const legendLabelStyles = (theme) => ({
-  label: {
-    paddingTop: theme.spacing(1),
-    whiteSpace: "nowrap",
-  },
-});
-const legendItemStyles = () => ({
-  item: {
-    flexDirection: "column",
-  },
-});
-
-const legendRootBase = ({ classes, ...restProps }) => (
-  <Legend.Root {...restProps} className={classes.root} />
-);
-const legendLabelBase = ({ classes, ...restProps }) => (
-  <Legend.Label className={classes.label} {...restProps} />
-);
-const legendItemBase = ({ classes, ...restProps }) => (
-  <Legend.Item className={classes.item} {...restProps} />
-);
-const Root = withStyles(legendStyles, { name: "LegendRoot" })(legendRootBase);
-const Label = withStyles(legendLabelStyles, { name: "LegendLabel" })(
-  legendLabelBase
-);
-const Item = withStyles(legendItemStyles, { name: "LegendItem" })(
-  legendItemBase
-);
-const demoStyles = () => ({
-  chart: {
-    paddingRight: "20px",
-  },
-  title: {
-    whiteSpace: "pre",
-  },
-});
-
-const ValueLabel = (props) => {
-  const { text } = props;
-  return <ValueAxis.Label {...props} text={`${text}%`} />;
-};
-
-const titleStyles = {
-  title: {
-    whiteSpace: "pre",
-  },
-};
-const TitleText = withStyles(titleStyles)(({ classes, ...props }) => (
-  <Title.Text {...props} className={classes.title} />
-));
-
-class Demo extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data,
-    };
-  }
-
-  render() {
-    const { data: chartData } = this.state;
-    const { classes } = this.props;
-
-    return (
-      <Paper>
-        <Chart data={chartData} className={classes.chart}>
-          <ArgumentAxis tickFormat={format} />
-          <ValueAxis max={50} labelComponent={ValueLabel} />
-
-          <LineSeries name="TV news" valueField="tvNews" argumentField="year" />
-          <LineSeries name="Church" valueField="church" argumentField="year" />
-          <LineSeries
-            name="Military"
-            valueField="military"
-            argumentField="year"
-          />
-          <Legend
-            position="bottom"
-            rootComponent={Root}
-            itemComponent={Item}
-            labelComponent={Label}
-          />
-          <Title
-            text={`Confidence in Institutions in American society ${"\n"}(Great deal)`}
-            textComponent={TitleText}
-          />
-          <Animation />
-        </Chart>
-      </Paper>
-    );
-  }
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
 }
 
-export default withStyles(demoStyles, { name: "Demo" })(Demo);
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+  },
+  checkBoxItems: {
+    display: "flex",
+    float: "right",
+    alignSelf: "flex-end",
+  },
+  checkBoxTitles: {
+    alignSelf: "center",
+    margin: theme.spacing(0, 1),
+  },
+}));
+
+export default function DailyForecast() {
+  const classes = useStyles();
+  const [tabValue, setTabValue] = React.useState(0);
+
+  const handleTabChange = (event) => {
+    if (event.target.checked) {
+      setTabValue(1);
+    } else {
+      setTabValue(0);
+    }
+  };
+
+  return (
+    <Container component="main" maxWidth="lg" className={classes.root}>
+      <Box className={classes.checkBoxItems}>
+        <Typography className={classes.checkBoxTitles}>Chart</Typography>
+        <Switch
+          onChange={handleTabChange}
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
+        <Typography className={classes.checkBoxTitles}>Table</Typography>
+      </Box>
+      <TabPanel value={tabValue} index={0}>
+        <DailyChart />
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={1}>
+        Item Two
+      </TabPanel>
+    </Container>
+  );
+}
