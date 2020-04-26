@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DailyForecast() {
+export default function DailyForecast(props) {
   const classes = useStyles();
   const [tabValue, setTabValue] = React.useState(0);
 
@@ -70,9 +70,8 @@ export default function DailyForecast() {
         <Typography className={classes.checkBoxTitles}>Table</Typography>
       </Box>
       <TabPanel value={tabValue} index={0}>
-        <DailyChart />
+        <DailyChart selectedCities={props.selectedCities} />
       </TabPanel>
-
       <TabPanel value={tabValue} index={1}>
         Item Two
       </TabPanel>

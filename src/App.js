@@ -45,7 +45,7 @@ function App() {
         onSelectedCityRemove={handleRemoveSelectedCities}
         selectedCities={selectedCities}
       />
-      <DailyForecast />
+      <DailyForecast selectedCities={selectedCities} />
     </React.Fragment>
   );
 }
