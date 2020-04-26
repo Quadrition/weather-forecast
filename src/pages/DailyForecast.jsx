@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Switch from "@material-ui/core/Switch";
+import DailyForecastChart from "../components/DailyForecastChart";
 import DailyForecastTable from "../components/DailyForecastTable";
 
 function TabPanel(props) {
@@ -69,7 +70,9 @@ export default function DailyForecast(props) {
         />
         <Typography className={classes.checkBoxTitles}>Table</Typography>
       </Box>
-      <TabPanel value={tabValue} index={0}></TabPanel>
+      <TabPanel value={tabValue} index={0}>
+        <DailyForecastChart selectedCities={props.selectedCities} />
+      </TabPanel>
       <TabPanel value={tabValue} index={1}>
         <DailyForecastTable selectedCities={props.selectedCities} />
       </TabPanel>
