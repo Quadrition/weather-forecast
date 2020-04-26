@@ -75,15 +75,19 @@ const TitleText = withStyles(titleStyles)(({ classes, ...props }) => (
 export default function DailyChart(props) {
   const classes = useStyles();
   const [chartData, setChartData] = React.useState([]);
+  console.log(chartData);
 
-  const Series = () => {
+  function Series() {
     return (
       <React.Fragment>
         <LineSeries name="Moscow" valueField="Moscow" argumentField="time" />
-        <LineSeries name="London" valueField="London" argumentField="time" />
+        <LineSeries name="London1" valueField="London1" argumentField="time" />
+        <LineSeries name="London2" valueField="London2" argumentField="time" />
+        <LineSeries name="London3" valueField="London3" argumentField="time" />
+        <LineSeries name="London4" valueField="London4" argumentField="time" />
       </React.Fragment>
     );
-  };
+  }
 
   const requests = props.selectedCities.map((city) =>
     fetch(
@@ -116,12 +120,27 @@ export default function DailyChart(props) {
       });
   }, [props.selectedCities]);
 
+  const series = [];
+  chartData[0] &&
+    Object.keys(chartData[0])
+      .filter((key) => key !== "time")
+      .forEach((key) =>
+        series.push(
+          <LineSeries
+            name="Novinskiye"
+            valueField="Novinskiye"
+            argumentField="time"
+          />
+        )
+      );
+
   return (
     <Paper>
       <Chart data={chartData} className={classes.chart}>
+        {series}
         <ArgumentAxis />
         <ValueAxis />
-        <Series />
+
         <Legend
           position="bottom"
           rootComponent={Root}

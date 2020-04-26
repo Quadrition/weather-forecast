@@ -4,7 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import Scrollbars from "react-custom-scrollbars";
 import Switch from "@material-ui/core/Switch";
+import DailyForecastTable from "../components/DailyForecastTable";
 import DailyChart from "../components/DailyChart";
 
 function TabPanel(props) {
@@ -69,11 +71,9 @@ export default function DailyForecast(props) {
         />
         <Typography className={classes.checkBoxTitles}>Table</Typography>
       </Box>
-      <TabPanel value={tabValue} index={0}>
-        <DailyChart selectedCities={props.selectedCities} />
-      </TabPanel>
+      <TabPanel value={tabValue} index={0}></TabPanel>
       <TabPanel value={tabValue} index={1}>
-        Item Two
+        <DailyForecastTable selectedCities={props.selectedCities} />
       </TabPanel>
     </Container>
   );
