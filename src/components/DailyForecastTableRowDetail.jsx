@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Paper from "@material-ui/core/Paper";
+import React from "react";
 import { useTheme } from "@material-ui/core/";
 import Container from "@material-ui/core/Container";
 import { PagingState, IntegratedPaging } from "@devexpress/dx-react-grid";
@@ -24,16 +23,6 @@ export default function DailyForecastTableRowDetail(props) {
 
   const [rows, setRows] = React.useState([]);
 
-  const [tableColumnExtensions] = useState([
-    { columnName: "time", width: "auto" },
-    { columnName: "temp", width: "auto" },
-    { columnName: "tempLow", width: "auto" },
-    { columnName: "tempHigh", width: "auto" },
-    { columnName: "pressure", width: "auto" },
-    { columnName: "visibility", width: "auto" },
-    { columnName: "humidity", width: "auto" },
-  ]);
-
   React.useEffect(() => {
     fetch(
       `http://api.openweathermap.org/data/2.5/forecast/?q=${props.row.city}&units=metric&appid=78e1adc1e41d5f49a06956e69d4225ce`
@@ -55,14 +44,14 @@ export default function DailyForecastTableRowDetail(props) {
 
         setRows(data);
       });
-  }, []);
+  }, [props.row.city]);
 
   return (
     <Container maxWidth="md" style={{ padding: themes.spacing(0, 2) }}>
       <Grid rows={rows} columns={columns}>
-        <PagingState defaultCurrentPage={0} pageSize={10} />
+        <PagingState defaultCurrentPage={0} pageSize={5} />
         <IntegratedPaging />
-        <Table columnExtensions={tableColumnExtensions} />
+        <Table />
         <TableHeaderRow />
         <PagingPanel />
       </Grid>

@@ -7,7 +7,6 @@ import {
   IntegratedSorting,
   SearchState,
   RowDetailState,
-  IntegratedFiltering,
 } from "@devexpress/dx-react-grid";
 import RowDetail from "./DailyForecastTableRowDetail";
 import {
@@ -16,8 +15,6 @@ import {
   TableHeaderRow,
   PagingPanel,
   TableRowDetail,
-  Toolbar,
-  SearchPanel,
 } from "@devexpress/dx-react-grid-material-ui";
 
 export default function DailyForecastTable(props) {
@@ -33,14 +30,14 @@ export default function DailyForecastTable(props) {
 
   const [rows, setRows] = React.useState([]);
 
-  const requests = props.selectedCities.map((city) =>
-    fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=78e1adc1e41d5f49a06956e69d4225ce`
-    )
-  );
-
   React.useEffect(() => {
-    Promise.all(requests)
+    Promise.all(
+      props.selectedCities.map((city) =>
+        fetch(
+          `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&units=metric&appid=78e1adc1e41d5f49a06956e69d4225ce`
+        )
+      )
+    )
       .then((responses) => {
         return responses;
       })

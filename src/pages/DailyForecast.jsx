@@ -4,10 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import Scrollbars from "react-custom-scrollbars";
 import Switch from "@material-ui/core/Switch";
 import DailyForecastTable from "../components/DailyForecastTable";
-import DailyChart from "../components/DailyChart";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
