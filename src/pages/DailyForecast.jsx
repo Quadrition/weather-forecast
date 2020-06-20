@@ -37,11 +37,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  checkBoxItems: {
-    display: "flex",
-    float: "right",
-    alignSelf: "flex-end",
-  },
   checkBoxTitles: {
     alignSelf: "center",
     margin: theme.spacing(0, 1),
@@ -62,14 +57,24 @@ export default function DailyForecast(props) {
 
   return (
     <Container component="main" maxWidth="lg" className={classes.root}>
-      <Box className={classes.checkBoxItems}>
-        <Typography className={classes.checkBoxTitles}>Chart</Typography>
-        <Switch
-          onChange={handleTabChange}
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
-        <Typography className={classes.checkBoxTitles}>Table</Typography>
+      <Box display="flex" flexDirection="row">
+        <Box flexGrow={1} ml={2}>
+          <Typography component="h2" variant="h5" color="primary" gutterBottom>
+            {tabValue === 0
+              ? "Graphical 5 day / 3 hour forecast "
+              : "Table current weather forecast"}
+          </Typography>
+        </Box>
+        <Box display="flex" flexDirection="row">
+          <Typography className={classes.checkBoxTitles}>Chart</Typography>
+          <Switch
+            onChange={handleTabChange}
+            inputProps={{ "aria-label": "secondary checkbox" }}
+          />
+          <Typography className={classes.checkBoxTitles}>Table</Typography>
+        </Box>
       </Box>
+
       <TabPanel value={tabValue} index={0}>
         <DailyForecastChart selectedCities={props.selectedCities} />
       </TabPanel>
